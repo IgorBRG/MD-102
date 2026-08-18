@@ -3,77 +3,105 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MD-102 — Treino</title>
+<title>MD-102 · Console de Estudo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <!-- Movendo o CSS para um arquivo separado para facilitar a leitura do HTML! -->
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
+<header class="top">
   <div class="hd-inner">
-    <p class="eyebrow">Microsoft Endpoint Administrator</p>
-    <h1>MD-102 — Treino</h1>
-    <p class="sub">409 questões em repetição espaçada. Acertou, ela some por mais tempo; errou, ela volta amanhã.</p>
-    <div class="modes">
-      <button class="mode on" data-mode="due"><b>Revisar hoje</b><span id="m-due">—</span></button>
-      <button class="mode" data-mode="trap"><b>Armadilhas</b><span id="m-trap">—</span></button>
-      <button class="mode" data-mode="free"><b>Livre</b><span id="m-free">—</span></button>
+    <p class="eyebrow"><span class="dot"></span> MD-102 · MICROSOFT ENDPOINT ADMINISTRATOR</p>
+    <h1>Console de estudo — 409 questões</h1>
+    <p class="sub">Repetição espaçada com o método de Leitner: cada questão é um dispositivo na sua frota. Responda, e o sistema decide quando ela deve voltar para revisão — igual ao Intune decide quando um dispositivo precisa fazer check-in.</p>
+    <div class="hd-stats">
+      <div class="hstat"><b id="hd-total">409</b><span>Questões</span></div>
+      <div class="hstat"><b id="hd-mastered">0</b><span>Dominadas</span></div>
+      <div class="hstat"><b id="hd-due">0</b><span>Vencendo hoje</span></div>
+      <div class="hstat"><b id="hd-streak">0%</b><span>Acerto na sessão</span></div>
     </div>
   </div>
 </header>
 
-<div class="fleet-box">
+<section class="fleet-section">
   <div class="fleet-hd">
-    <span>Mapa das 409 — <b id="fleet-label">clique para ir direto</b></span>
-    <span id="fleet-count"></span>
+    <h2>Frota de questões <span class="n" id="fleet-label">— de 409</span></h2>
+    <span id="fleet-count">409 nesta fila</span>
   </div>
   <div class="fleet" id="fleet"></div>
   <div class="legend">
-    <span><i style="background:#3C5470"></i>não vista</span>
-    <span><i style="background:#E0685C"></i>caixa 1</span>
-    <span><i style="background:#E39B45"></i>2</span>
-    <span><i style="background:#D9C441"></i>3</span>
-    <span><i style="background:#7FC079"></i>4</span>
-    <span><i style="background:#2FB37A"></i>dominada</span>
+    <span><i style="background:#2A4A6E"></i>não vista</span>
+    <span><i style="background:var(--box1)"></i>caixa 1</span>
+    <span><i style="background:var(--box2)"></i>caixa 2</span>
+    <span><i style="background:var(--box3)"></i>caixa 3</span>
+    <span><i style="background:var(--box4)"></i>caixa 4</span>
+    <span><i style="background:var(--box5)"></i>caixa 5 · dominada</span>
+    <span>◻ contorno branco = vencida hoje</span>
+    <span>◻ contorno dourado = marcada</span>
   </div>
-</div>
+</section>
 
 <div class="wrap">
-  <div class="score">
-    <div><div class="k">Dominadas</div><div class="v ok" id="s-mastered">0</div></div>
-    <div><div class="k">Aprendendo</div><div class="v tl" id="s-learning">0</div></div>
-    <div><div class="k">Nunca vistas</div><div class="v" id="s-new">0</div></div>
-    <div><div class="k">Sessão</div><div class="v" id="s-sess">0</div></div>
-    <div><div class="k">Acerto na sessão</div><div class="v" id="s-pct">—</div></div>
+
+  <div class="dash">
+    <div class="tile mastered"><div class="k" id="s-mastered">0</div><div class="l">Dominadas</div></div>
+    <div class="tile learning"><div class="k" id="s-learning">0</div><div class="l">Em progresso</div></div>
+    <div class="tile new"><div class="k" id="s-new">409</div><div class="l">Novas</div></div>
+    <div class="tile session"><div class="k" id="s-pct">—</div><div class="l"><span id="s-sess">0</span> respondidas na sessão</div></div>
   </div>
 
-  <div class="bar">
-    <div class="grow"><label class="f" for="f-topic">Tópico</label><select id="f-topic"></select></div>
-    <div class="grow"><label class="f" for="f-type">Tipo</label><select id="f-type"></select></div>
-    <div class="grow"><label class="f" for="f-search">Buscar</label><input type="search" id="f-search" placeholder="Autopilot, BitLocker, WUfB..."></div>
-    <label class="chk"><input type="checkbox" id="f-recall" checked> Modo recordação</label>
-    <label class="chk"><input type="checkbox" id="f-only"> Só múltipla escolha</label>
-    <div class="spacer"></div>
-    <button class="b ghost mini" id="btn-shuffle">Embaralhar</button>
+  <div class="controls">
+    <div class="modes">
+      <button class="mode on" data-mode="due">Devido hoje <span class="cnt" id="m-due">—</span></button>
+      <button class="mode" data-mode="trap">Armadilhas <span class="cnt" id="m-trap">—</span></button>
+      <button class="mode" data-mode="flag">Marcadas <span class="cnt" id="m-flag">—</span></button>
+      <button class="mode" data-mode="free">Livre <span class="cnt">409</span></button>
+      <button class="mode exam" id="btn-open-exam">▶ Simulado cronometrado</button>
+    </div>
+    <div class="filters">
+      <select id="f-topic"></select>
+      <select id="f-type"></select>
+      <input type="text" id="f-search" placeholder="Buscar por palavra-chave…">
+      <label class="chk"><input type="checkbox" id="f-only"> só com gabarito</label>
+      <label class="chk"><input type="checkbox" id="f-recall" checked> modo lembrança</label>
+      <button class="iconbtn" id="btn-shuffle">🔀 Embaralhar</button>
+    </div>
   </div>
 
   <div id="stage"></div>
 
-  <div class="acts">
-    <button class="b ghost" id="btn-prev">&larr; Anterior</button>
-    <button class="b primary" id="btn-next">Próxima &rarr;</button>
+  <div class="navbar">
+    <button class="b ghost" id="btn-prev">‹ Anterior</button>
+    <span class="pos" id="pos-label">—</span>
+    <button class="b ghost" id="btn-next">Próxima ›</button>
+    <div class="spacer"></div>
   </div>
 
-  <div class="weak" id="weak"></div>
+  <div class="panel" id="weak"></div>
 
-  <div class="foot">
-    <span><kbd>1</kbd>–<kbd>6</kbd> alternativa · <kbd>Enter</kbd> verificar · <kbd>&larr;</kbd><kbd>&rarr;</kbd> navegar</span>
-    <span class="spacer"></span>
-    <span id="save-state">—</span>
-    <button id="btn-export">Baixar progresso</button>
-    <button id="btn-import">Restaurar</button>
-    <button id="btn-reset">Zerar tudo</button>
+  <footer class="foot">
+    <div>Atalhos: <span class="kbd">←</span><span class="kbd">→</span> navegar · <span class="kbd">Enter</span> confirmar · <span class="kbd">1–6</span> marcar alternativa · <span class="kbd">F</span> marcar questão</div>
+    <div class="toolbtns">
+      <span id="save-state">carregando…</span>
+      <button class="iconbtn" id="btn-export">Exportar progresso</button>
+      <button class="iconbtn" id="btn-import">Importar</button>
+      <button class="iconbtn" id="btn-reset">Zerar tudo</button>
+      <input type="file" id="file-in" accept=".json" style="display:none">
+    </div>
+  </footer>
+</div>
+
+<!-- ================= EXAM OVERLAY ================= -->
+<div id="exam-overlay">
+  <div class="exam-hd" id="exam-hd-bar" style="display:none">
+    <span class="t">Simulado MD-102</span>
+    <span id="exam-progress" style="font-family:var(--mono);font-size:13px;color:#B7CBE0"></span>
+    <span class="exam-timer" id="exam-timer">00:00</span>
+    <button class="iconbtn" id="btn-exam-exit">Sair</button>
   </div>
-  <input type="file" id="file-in" accept="application/json" style="display:none">
+  <div class="exam-wrap" id="exam-body"></div>
 </div>
 
 
