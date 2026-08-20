@@ -506,3 +506,33 @@ document.addEventListener('keydown', e => {
 
 fillSelects(); buildFleet();
 loadState().then(() => buildOrder(false));
+
+
+
+// Lógica para controle do Modo Escuro com Segmented Control
+const btnLight = document.getElementById('btn-theme-light');
+const btnDark = document.getElementById('btn-theme-dark');
+if (btnLight && btnDark) {
+  let currentTheme = localStorage.getItem('theme');
+  if (!currentTheme) {
+    currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  const applyTheme = (theme) => {
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      btnDark.classList.add('active');
+      btnLight.classList.remove('active');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      btnLight.classList.add('active');
+      btnDark.classList.remove('active');
+    }
+    localStorage.setItem('theme', theme);
+  };
+
+  applyTheme(currentTheme);
+
+  btnLight.addEventListener('click', () => applyTheme('light'));
+  btnDark.addEventListener('click', () => applyTheme('dark'));
+}

@@ -35,7 +35,32 @@
   --shadow-sm: 0 1px 2px rgba(16,27,38,.06);
   --shadow-md: 0 6px 20px rgba(16,27,38,.09);
 }
-@media (prefers-color-scheme: dark){ }
+/* Adicionando variáveis para o Modo Escuro, mantendo a leitura confortável! */
+[data-theme="dark"] {
+  --bg:        #0E141A;
+  --bg-grid:   #151C23;
+  --surface:   #1A222B;
+  --surface-2: #212933;
+  --line:      #2A3542;
+  --line-2:    #354251;
+
+  --ink:       #EAEFF4;
+  --ink-2:     #A6B6C4;
+  --ink-3:     #9BAEBF;
+
+  --brand:     #3582DE;
+  --brand-ink: #79AEF1;
+  --brand-soft:#1C3048;
+
+  --amber:     #D89A38;
+  --amber-soft:#3A2A12;
+  --good:      #2A9E75;
+  --good-soft: #14352A;
+  --bad:       #D85547;
+  --bad-soft:  #3D1E1B;
+  --slate:     #8C9BAA;
+  --slate-soft:#212B36;
+}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
@@ -151,11 +176,11 @@ h1{
 .mode .cnt{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); font-weight:500}
 .mode.on{background:var(--brand); border-color:var(--brand); color:#fff}
 .mode.on .cnt{color:#D8E7F7}
-.mode.exam{ margin-left:auto; background:var(--ink); border-color:var(--ink); color:#fff; }
-.mode.exam:hover{ background:#000 }
+.mode.exam{ margin-left:auto; background:var(--ink); border-color:var(--ink); color:var(--surface); }
+.mode.exam:hover{ opacity: 0.8; }
 
 .filters{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
-.filters select, .filters input[type=text]{
+.filters select, .filters input[type=text]{ background:var(--surface); color:var(--ink);
   font-family:var(--sans); font-size:13px; padding:8px 10px; border:1px solid var(--line-2);
   border-radius:8px; background:var(--surface); color:var(--ink);
 }
@@ -315,7 +340,7 @@ footer.foot .toolbtns{display:flex; gap:8px}
   padding:20px; text-align:left; display:flex; flex-direction:column; gap:14px; box-shadow:var(--shadow-sm);
 }
 .exam-opts label{font-size:12.5px; font-weight:600; color:var(--ink-2); display:block; margin-bottom:5px}
-.exam-opts select, .exam-opts input{width:100%; padding:9px 10px; border:1px solid var(--line-2); border-radius:8px; font-family:inherit}
+.exam-opts select, .exam-opts input{ background:var(--surface); color:var(--ink);width:100%; padding:9px 10px; border:1px solid var(--line-2); border-radius:8px; font-family:inherit}
 .exam-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(30px,1fr)); gap:4px; margin-bottom:18px}
 .egrid-cell{
   aspect-ratio:1; border-radius:6px; border:1px solid var(--line-2); background:var(--surface);
@@ -343,3 +368,31 @@ footer.foot .toolbtns{display:flex; gap:8px}
   .dash{grid-template-columns:1fr 1fr}
   .filters{flex-direction:column; align-items:stretch}
 }
+
+
+/* Estilos para o Switch de Tema (Estilo iOS) */
+.theme-switch {
+  display: inline-flex;
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  border-radius: 20px;
+  padding: 2px;
+  align-items: center;
+}
+.theme-btn {
+  background: transparent;
+  border: none;
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.theme-btn.active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
