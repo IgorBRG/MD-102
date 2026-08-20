@@ -205,7 +205,7 @@ h1{
 
 .qtop{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:14px}
 .qn{
-  font-family:var(--mono); font-weight:600; font-size:13px; background:var(--ink); color:#fff;
+  font-family:var(--mono); font-weight:600; font-size:13px; background:var(--ink); color:var(--surface);
   padding:3px 9px; border-radius:6px;
 }
 .tag{
