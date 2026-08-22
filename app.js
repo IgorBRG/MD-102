@@ -512,21 +512,27 @@ loadState().then(() => buildOrder(false));
 // Lógica para controle do Modo Escuro com Segmented Control
 const btnLight = document.getElementById('btn-theme-light');
 const btnDark = document.getElementById('btn-theme-dark');
-if (btnLight && btnDark) {
+const btnSylveon = document.getElementById('btn-theme-sylveon');
+if (btnLight && btnDark && btnSylveon) {
   let currentTheme = localStorage.getItem('theme');
   if (!currentTheme) {
     currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
   const applyTheme = (theme) => {
+    document.documentElement.removeAttribute('data-theme');
+    btnLight.classList.remove('active');
+    btnDark.classList.remove('active');
+    btnSylveon.classList.remove('active');
+    
     if (theme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
       btnDark.classList.add('active');
-      btnLight.classList.remove('active');
+    } else if (theme === 'sylveon') {
+      document.documentElement.setAttribute('data-theme', 'sylveon');
+      btnSylveon.classList.add('active');
     } else {
-      document.documentElement.removeAttribute('data-theme');
       btnLight.classList.add('active');
-      btnDark.classList.remove('active');
     }
     localStorage.setItem('theme', theme);
   };
@@ -535,4 +541,5 @@ if (btnLight && btnDark) {
 
   btnLight.addEventListener('click', () => applyTheme('light'));
   btnDark.addEventListener('click', () => applyTheme('dark'));
+  btnSylveon.addEventListener('click', () => applyTheme('sylveon'));
 }

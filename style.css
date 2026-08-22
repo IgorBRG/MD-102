@@ -1,6 +1,15 @@
 ﻿/* Movendo o CSS para cá para manter o HTML mais limpo e organizado! */
 :root{
   /* ---- token system ---- */
+  
+  --top-bg-1: #0F2340;
+  --top-bg-2: #163459;
+  --top-text: #EAF1F8;
+  --top-dim: #B7CBE0;
+  --top-dim-2: #9DB4CC;
+  --top-accent: #7FB3E0;
+  --fleet-bg: #2A4A6E;
+
   --bg:        #EBEFF3;
   --bg-grid:   #E2E8EE;
   --surface:   #FFFFFF;
@@ -37,6 +46,15 @@
 }
 /* Adicionando variáveis para o Modo Escuro, mantendo a leitura confortável! */
 [data-theme="dark"] {
+  
+  --top-bg-1: #0F2340;
+  --top-bg-2: #163459;
+  --top-text: #EAF1F8;
+  --top-dim: #B7CBE0;
+  --top-dim-2: #9DB4CC;
+  --top-accent: #7FB3E0;
+  --fleet-bg: #2A4A6E;
+
   --bg:        #0E141A;
   --bg-grid:   #151C23;
   --surface:   #1A222B;
@@ -83,8 +101,8 @@ button{font-family:inherit}
 
 /* ================= HEADER ================= */
 header.top{
-  background: linear-gradient(180deg, #0F2340 0%, #163459 100%);
-  color:#EAF1F8;
+  background: linear-gradient(180deg, var(--top-bg-1) 0%, var(--top-bg-2) 100%);
+  color:var(--top-text);
   padding:26px 20px 30px;
   position:relative;
   overflow:hidden;
@@ -102,41 +120,41 @@ header.top::after{
 .hd-inner{max-width:1080px;margin:0 auto;position:relative}
 .eyebrow{
   font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-  color:#7FB3E0; margin:0 0 10px; display:flex; align-items:center; gap:8px;
+  color:var(--top-accent); margin:0 0 10px; display:flex; align-items:center; gap:8px;
 }
 .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#59D69B;box-shadow:0 0 0 3px rgba(89,214,155,.18)}
 h1{
   font-family:var(--disp); font-weight:650; font-size:clamp(26px,4vw,34px);
   letter-spacing:-.01em; margin:0 0 8px; line-height:1.1;
 }
-.sub{color:#B7CBE0; font-size:13.5px; max-width:58ch; margin:0 0 20px}
+.sub{color:var(--top-dim); font-size:13.5px; max-width:58ch; margin:0 0 20px}
 .hd-stats{display:flex; gap:10px; flex-wrap:wrap}
 .hstat{
   background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
   border-radius:var(--radius); padding:9px 14px; min-width:96px;
 }
-.hstat b{display:block; font-family:var(--mono); font-size:19px; font-weight:600; color:#fff}
-.hstat span{font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:#9DB4CC}
+.hstat b{display:block; font-family:var(--mono); font-size:19px; font-weight:600; color:var(--top-text)}
+.hstat span{font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--top-dim-2)}
 
 /* ================= FLEET (signature element) ================= */
-.fleet-section{ background:#0F2340; padding:0 20px 22px; }
+.fleet-section{ background:var(--top-bg-2); padding:0 20px 22px; }
 .fleet-hd{
   max-width:1080px;margin:0 auto 8px; display:flex; justify-content:space-between; align-items:baseline;
   flex-wrap:wrap; gap:8px;
 }
 .fleet-hd h2{
   font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
-  color:#7FB3E0; margin:0; font-weight:500;
+  color:var(--top-accent); margin:0; font-weight:500;
 }
-.fleet-hd .n{ color:#fff; font-weight:600; font-family:var(--sans) }
-#fleet-count{font-family:var(--mono); font-size:11px; color:#9DB4CC}
+.fleet-hd .n{ color:var(--top-text); font-weight:600; font-family:var(--sans) }
+#fleet-count{font-family:var(--mono); font-size:11px; color:var(--top-dim-2)}
 .fleet{
   max-width:1080px;margin:0 auto;
   display:grid; grid-template-columns:repeat(auto-fill,minmax(10px,1fr)); gap:2px;
 }
 .cell{
   aspect-ratio:1; border:0; padding:0; border-radius:1px; cursor:pointer;
-  background:#2A4A6E; transition:transform .12s ease;
+  background:var(--fleet-bg); transition:transform .12s ease;
 }
 .cell:hover{ transform:scale(1.7); z-index:2; }
 .cell.b1{background:var(--box1)} .cell.b2{background:var(--box2)}
@@ -145,7 +163,7 @@ h1{
 .cell.due{box-shadow:inset 0 0 0 1px #fff}
 .cell.cur{outline:2px solid #fff; outline-offset:1px}
 .cell.flagged{box-shadow:inset 0 0 0 1px #F2C94C}
-.legend{max-width:1080px;margin:9px auto 0; display:flex; gap:14px; flex-wrap:wrap; font-size:10.5px; color:#9DB4CC; font-family:var(--mono)}
+.legend{max-width:1080px;margin:9px auto 0; display:flex; gap:14px; flex-wrap:wrap; font-size:10.5px; color:var(--top-dim-2); font-family:var(--mono)}
 .legend i{display:inline-block;width:9px;height:9px;border-radius:1px;margin-right:5px;vertical-align:-1px}
 
 /* ================= DASHBOARD TILES ================= */
@@ -326,7 +344,7 @@ footer.foot .toolbtns{display:flex; gap:8px}
 }
 #exam-overlay.show{display:block}
 .exam-hd{
-  background:linear-gradient(180deg,#0F2340,#163459); color:#EAF1F8; padding:16px 20px;
+  background:linear-gradient(180deg,var(--top-bg-1),var(--top-bg-2)); color:var(--top-text); padding:16px 20px;
   display:flex; align-items:center; gap:16px; position:sticky; top:0; z-index:2;
 }
 .exam-hd .t{font-family:var(--disp); font-weight:650}
@@ -396,3 +414,40 @@ footer.foot .toolbtns{display:flex; gap:8px}
   box-shadow: var(--shadow-sm);
 }
 
+
+
+/* Tema Sylveon */
+[data-theme="sylveon"] {
+  
+  --top-bg-1: #FDF1F6;
+  --top-bg-2: #F9E4EC;
+  --top-text: #2A3A4A;
+  --top-dim: #7A697B;
+  --top-dim-2: #A58693;
+  --top-accent: #D16B8F;
+  --fleet-bg: #EABFCE;
+
+  --bg:        #FDF8FA;
+  --bg-grid:   #F7EAF0;
+  --surface:   #FFFFFF;
+  --surface-2: #FFF0F5;
+  --line:      #F4DDE5;
+  --line-2:    #EABFCE;
+
+  --ink:       #2A3A4A;
+  --ink-2:     #527091;
+  --ink-3:     #7CA1C4;
+
+  --brand:     #F08CAE;
+  --brand-ink: #D16B8F;
+  --brand-soft:#FCE8EE;
+
+  --amber:     #6DC2ED;
+  --amber-soft:#E2F3FB;
+  --good:      #5BC5A8;
+  --good-soft: #DEF4EE;
+  --bad:       #E56A7A;
+  --bad-soft:  #FBE1E4;
+  --slate:     #9AB1C6;
+  --slate-soft:#F2F6F9;
+}
